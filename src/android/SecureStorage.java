@@ -3,6 +3,7 @@ package com.crypho.plugins;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 
+import android.content.ActivityNotFoundException;
 import android.util.Log;
 import android.util.Base64;
 import android.os.Build;
@@ -101,8 +102,10 @@ public class SecureStorage extends CordovaPlugin {
             SharedPreferencesHandler PREFS = new SharedPreferencesHandler(alias, ctx);
             SERVICE_STORAGE.put(service, PREFS);
 
+
             // To check whether the device is secure
             if (!isDeviceSecure()) {
+                Log.i("INFO","Device is not secure");
                 Log.e(TAG, MSG_DEVICE_NOT_SECURE);
                 callbackContext.error(MSG_DEVICE_NOT_SECURE);
                 return true;
@@ -111,11 +114,12 @@ public class SecureStorage extends CordovaPlugin {
             // To check whether the device is matching API 28 or above i.e not longer support for com.android.credentials.UNLOCK
             // Hence init success callback
             if (MATCHES_ANDROID_API_28) {
-                Log.e(TAG, MATCHES_ANDROID_API_28);
+                Log.i("INFO","Device is beyond API28");
                 initSuccess(callbackContext);
                 return true;
             }
 
+            Log.i("INFO","Device is below API28, hence calling unlockCreds");
             // For lower devices than MATCHES_ANDROID_API_28, Init callback context and Dispatch com.android.credentials.UNLOCK
             initContext = callbackContext;
             unlockCredentials();
