@@ -24,7 +24,7 @@ public class SecureStorage extends CordovaPlugin {
 
     private static final String TAG = "SecureStorage";
     private static final boolean SUPPORTED = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
-    private static final boolean MATCHES_ANDROID_API_28 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
+    private static final boolean MATCHES_ANDROID_API_28 = Build.VERSION.SDK_INT >= 28;
     private static final String ACTION_UNLOCK = "com.android.credentials.UNLOCK";
     private static final String MSG_NOT_SUPPORTED = "API 21 (Android 5.0 Lollipop) is required. This device is running API " + Build.VERSION.SDK_INT;
     private static final String MSG_DEVICE_NOT_SECURE = "Device is not secure";
